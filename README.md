@@ -29,10 +29,11 @@ development using the React library and JavaScript (ES6) using the following too
 Tasks
 =====
 - [x] Create basic directory structure
-- [ ] Setup npm
-- [ ] Setup webpack
+- [x] Setup npm
+- [ ] Setup webpack for transpiling (ES6/JSX) and template
 - [ ] Create basic boilerplate (HTML5Boilerplate) JSX and entry point
-- [ ] Setup 
+- [ ] Setup webpack dev server
+- [ ]
 
 
 WebStorm Setup Tips
