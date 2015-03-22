@@ -58,7 +58,7 @@ WebStorm Setup Tips
 Boilerplate Implementation Notes
 ================================
 
-The following is a very gentle introduction to how this boilerplate is put together.
+The following is a *very gentle* introduction to how this boilerplate is put together in a step-by-step manner.
 
 
 ## Task 1: Setup basic directory structure
@@ -152,12 +152,79 @@ We are using our own `index.html` template based on the [default](https://github
 and including various HTML5 Boilerplate suggestions (including the important viewport <meta> tag).
 
 
-## Task 6: 
+## Task 6: Babel loader for transpiling ES6 and React JSX
+
+Our goal now is to render a simple React (v0.13) component written in 
+[ES6 class syntax](https://facebook.github.io/react/blog/2015/01/27/react-v0.13.0-beta-1.html).
+This is achieved by the following code in `App.jsx`:
+ 
+```javascript
+import React from "react";
+
+export default class App extends React.Component {
+    render() {
+        let items = [];
+        for (let i = 0; i < 100; i++) {
+            items[i] = <div>Hello {this.props.name}! The square of {i+1} is {(i+1) * (i+1)}</div>;
+        }
+        return <div>{items}</div>
+    }
+}
+```
+
+Note that we are using [ES6 module syntax](https://babeljs.io/docs/learn-es6/) which defaults in
+Babel to transpiling to CommonJS. Of course, we also need to add React as a dependency via
+`npm install react --save`.
+
+`main.js` is our entry point for webpack, so we add the following (again with ES6 module imports).
+
+```javascript
+import React from "react";
+import App from "./ui/App.jsx";
+
+React.render(<App name="YOU"/>, document.getElementById("app"));
+```
+
+We are rendering to an element within `document.body` since our template includes a warning message to
+IE8 browser users; `React.render(...)` will generally *replace* the body of the element provided. 
+
+However, these files will not compile using webpack without an ES6 and JSX transpiler. So we introduce
+[babel-loader](https://github.com/babel/babel-loader) via `npm install babel-loader --save-dev`
+for this purpose in `webpack.config.js` as follows:
+
+```javascript
+module.exports = {
+    ...,
+    module: {
+        loaders: [
+            {
+                test: /\.(js|jsx)$/,        // either .js or .jsx files
+                exclude: /node_modules/,
+                loader: "babel-loader"
+            }
+        ]
+    },
+    ...
+};
+```
+
+Note that `.js` files in the project (excluding `node_modules`) are now treated as ES6; it might be prudent to rename
+these files to something else (e.g. `.es6`) but for now we will leave it.
+
+Using `webpack-dev-server` (installed globally at this stage via `npm install webpack-dev-server -g`) will provide
+a working web page (defaults to <http://localhost:8080/>).
 
 
+
+## Task ?:
+
+* WebStorm configuration for babel? See <http://blog.drawable.de/2015/02/27/es6-in-webstorm-9-setting-up-a-filewatcher/>
 
 
 ## Task ?: Setup npm scripts for webpack
+
+Due to the way [npm includes `node_modules/.bin` in PATH](https://docs.npmjs.com/misc/scripts), setting up custom
+scripts for npm avoids the need to globally install utilities (e.g. `webpack`).
 
 e.g.:
 * webpack
