@@ -1,7 +1,8 @@
 import React from "react";
 
 //noinspection JSUnusedGlobalSymbols
-export default class App extends React.Component {
+export default class App extends React.Component
+{
     //noinspection JSUnusedGlobalSymbols
     render() {
         const items = [];
@@ -11,3 +12,4 @@ export default class App extends React.Component {
         return <div>{items}</div>;
     }
 }
+App.propTypes = {name: React.PropTypes.String};

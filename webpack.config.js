@@ -9,7 +9,7 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.(js|jsx)$/,        // either .js or .jsx files
+                test: /\.js$/,        // assuming JSX and ES6 is simply .js
                 exclude: /node_modules/,
                 loader: "babel-loader"
             }

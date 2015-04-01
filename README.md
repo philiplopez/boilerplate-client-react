@@ -1,3 +1,5 @@
+**Project Status:** In early development, but useful as gentle introduction to some modern (2015) JavaScript tools.  
+
 Overview
 ========
 
@@ -230,10 +232,7 @@ Configuring ESLint support in WebStorm 10 is simply a matter of enabling the ESL
 For help on resolving lint warnings, go to <http://jslinterrors.com/>.
 
 
-## Task ?:
-
-* WebStorm configuration for babel, eslint? See <http://blog.drawable.de/2015/02/27/es6-in-webstorm-9-setting-up-a-filewatcher/>
-
-
-
-
+## Future tasks:
+* Task ?: Introduce unit tests with mocha/chai
+* Task ?: Basic "app" (templates, routes) 
+* Task ?: Webstorm configuration for babel (if this is necessary)...
