@@ -215,19 +215,25 @@ Using `webpack-dev-server` (installed globally at this stage via `npm install we
 a working web page (defaults to <http://localhost:8080/>).
 
 
+## Task 7: Setup npm scripts for webpack
+
+Due to the way [npm includes `node_modules/.bin` in PATH](https://docs.npmjs.com/misc/scripts), setting up custom
+scripts for npm avoids the need to globally install (`npm install -g ...`) utilities (e.g. `webpack`). This is
+easily done using the "scripts" array in `package.json`, e.g.
+
+```javascript
+"scripts": {
+    "server": "webpack-dev-server"
+```
+
+So now we can simply run `npm run server`. Invoking `npm run` without any arguments lists the available scripts 
+(and their definitions).
+
 
 ## Task ?:
 
 * WebStorm configuration for babel? See <http://blog.drawable.de/2015/02/27/es6-in-webstorm-9-setting-up-a-filewatcher/>
 
 
-## Task ?: Setup npm scripts for webpack
 
-Due to the way [npm includes `node_modules/.bin` in PATH](https://docs.npmjs.com/misc/scripts), setting up custom
-scripts for npm avoids the need to globally install utilities (e.g. `webpack`).
-
-e.g.:
-* webpack
-* webpack -p
-* webpack-dev-server
 
