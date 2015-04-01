@@ -35,16 +35,6 @@ Usage Notes
     * favicon.ico
 
 
-Tasks ToDo
-==========
-- [x] Create basic directory structure
-- [x] Setup npm
-- [ ] Create basic boilerplate (HTML5Boilerplate) JSX and entry point
-- [ ] Setup webpack for transpiling (ES6/JSX) and template
-- [ ] Setup webpack dev server
-- [ ]
-
-
 WebStorm Setup Tips
 ===================
 
@@ -230,9 +220,19 @@ So now we can simply run `npm run server`. Invoking `npm run` without any argume
 (and their definitions).
 
 
+## Task 8: Setup eslint
+
+[ESLint](http://eslint.org/) is a modern linting utility that supports ES6 and JSX. Basic configuration is
+in `.eslintrc` and an npm script `lint` is created.
+
+Configuring ESLint support in WebStorm 10 is simply a matter of enabling the ESLint code quality tool.
+
+For help on resolving lint warnings, go to <http://jslinterrors.com/>.
+
+
 ## Task ?:
 
-* WebStorm configuration for babel? See <http://blog.drawable.de/2015/02/27/es6-in-webstorm-9-setting-up-a-filewatcher/>
+* WebStorm configuration for babel, eslint? See <http://blog.drawable.de/2015/02/27/es6-in-webstorm-9-setting-up-a-filewatcher/>
 
 
 
