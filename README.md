@@ -232,7 +232,63 @@ Configuring ESLint support in WebStorm 10 is simply a matter of enabling the ESL
 For help on resolving lint warnings, go to <http://jslinterrors.com/>.
 
 
+# Task 9: Setting up react-router
+
+Let's move from a trivial component to something a little more sophisticated with multiple "places" (routes).
+We won't adopt a larger pattern/framework just yet, but will introduce [react-router](https://github.com/rackt/react-router)
+which is a popular routing tool for React. `npm install react-router --save` is the first step of course.
+
+We'll use the ubiquitous "e-commerce" use case, where there are Products to purchase, and a Shopping Cart.
+
+We'll introduce the following two "places" (routes) in the app to support deep linking.
+
+* `/` - home, should provide a "catalog" view of the products
+* `/product/{productId}` - the product details page
+
+We also want to have a some basic layout template so that headers and footers are shared.
+
+Our `main.js` bootstrap needs to reference the react-router Router object and provide it
+with both a `routes` data structure as well as a route *handler* callback.
+
+```javascript
+Router.run(routes, Router.HashLocation, (Handler) => {
+    React.render(<Handler />, document.getElementById("app"));
+});
+```
+
+We explicitly instruct the Router to use the `HashLocation` implementation (which is the default). Later this
+will change to `HistoryLocation`. There are a number of 
+[Location implementations](https://github.com/rackt/react-router/blob/master/docs/api/Location.md).
+
+We can see that `<Handler />` is some React component that is going to be rendered, and presumably `routes` is
+some sort of map from a location to a component. We define `routes` in `routes.js`:
+
+```javascript
+const routes = (
+    <Route name="app" path="/" handler={AppTemplate}>
+        <DefaultRoute name="catalog" handler={CatalogPage} />
+        <Route name="product" path="product/:productId" handler={ProductPage} />
+    </Route>
+);
+```
+
+This is the JSX-based way of configuring routes that react-router uses.
+
+What we haven't covered here is:
+
+* shared services (client-side) and related dependency injection
+* server-side rendering (so-called "isomorphic" applications)
+* code splitting (i.e. splitting the bundle into smaller chunks downloaded on-demand - but our bundle.js is
+only ~60kB when minified and gzipped at the moment, albeit without much code).
+
+
+
 ## Future tasks:
+* Task ?: Introduce styling with https://github.com/js-next/react-style
 * Task ?: Introduce unit tests with mocha/chai
 * Task ?: Basic "app" (templates, routes) 
 * Task ?: Webstorm configuration for babel (if this is necessary)...
+* Task ?: webpack-dev-server options... e.g. devtool eval/source-maps
+* Task ?: Test with site performance testing tools, e.g.
+    * [Google PageSpeed](https://developers.google.com/speed/pagespeed/)
+    * [YSlow](http://yslow.org/)
